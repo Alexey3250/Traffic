@@ -48,13 +48,3 @@ The model's performance after training for 10 epochs is as follows:
 
 ## Files
 - `model.h5`: Saved model after training (if provided as a command-line argument).
-
-## Contributing
-Feel free to fork this project, submit pull requests, or send suggestions to improve the code or the model's performance.
-
-## License
-Specify the license under which this project is available, e.g., MIT, GPL, etc.
-
----
-
-🧠 Remember to replace the placeholders with your specific information, and elaborate on any section where you think more detail will be helpful. If you have conducted experiments with different architectures or parameters, it would also be beneficial to include a section on 'Experiments and Findings' to outline what configurations you tried and what the outcomes were. Would you like to add any specific details or sections to this README?
