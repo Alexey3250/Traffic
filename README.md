@@ -1,7 +1,11 @@
 # Traffic Sign Recognition with 98.74% Accuracy
 <img src="https://i.imgur.com/0w8qDPz.jpg">
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cGvT-y1VWfY?si=je2xiirfrZs3oDmo&amp;start=2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+# Youtube Video
+< 
+https://youtu.be/cGvT-y1VWfY?si=iePNO_3GFu_5ca81
+
+[![Watch the video](https://img.youtube.com/vi/<VIDEO_ID>/hqdefault.jpg)](https://youtu.be/cGvT-y1VWfY?si=iePNO_3GFu_5ca81)
 
 ## Overview
 This project aims to develop a neural network model to classify traffic signs using the German Traffic Sign Recognition Benchmark (GTSRB) dataset. The model is built and trained using TensorFlow and achieves high accuracy in distinguishing among 43 different traffic sign categories.
