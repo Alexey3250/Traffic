@@ -58,7 +58,23 @@ def load_data(data_dir):
     be a list of integer labels, representing the categories for each of the
     corresponding `images`.
     """
-    raise NotImplementedError
+    images = []
+    labels = []
+    
+    for category in range(NUM_CATEGORIES):
+        category_path = os.path.join(data_dir, str(category))
+        if not os.path.exists(category_path):
+            continue
+        
+        for img_file in os.listdir(category_path):
+            img_path = os.path.join(category_path, img_file)
+            img = cv2.imread(img_path)
+            if img is not None:
+                img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
+                images.append(img)
+                labels.append(category)
+    
+    return (np.array(images), np.array(labels))
 
 
 def get_model():
@@ -67,7 +83,56 @@ def get_model():
     `input_shape` of the first layer is `(IMG_WIDTH, IMG_HEIGHT, 3)`.
     The output layer should have `NUM_CATEGORIES` units, one for each category.
     """
-    raise NotImplementedError
+    model = tf.keras.models.Sequential([    
+        # First convolutional layer
+        tf.keras.layers.Conv2D(filters=16, kernel_size=(3,3), activation='relu', input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
+
+        # Second convolutional layer
+        tf.keras.layers.Conv2D(filters=32, kernel_size=(3,3), activation='relu'),
+
+        # First max pooling layer
+        tf.keras.layers.MaxPool2D(pool_size=(2, 2)),
+
+        # First batch normalization layer
+        tf.keras.layers.BatchNormalization(axis=-1),
+
+        # Third convolutional layer
+        tf.keras.layers.Conv2D(filters=64, kernel_size=(3,3), activation='relu'),
+
+        # Fourth convolutional layer
+        tf.keras.layers.Conv2D(filters=128, kernel_size=(3,3), activation='relu'),
+
+        # Second max pooling layer
+        tf.keras.layers.MaxPool2D(pool_size=(2, 2)),
+
+        # Second batch normalization layer
+        tf.keras.layers.BatchNormalization(axis=-1),
+
+        # Flatten the output for the dense layer
+        tf.keras.layers.Flatten(),
+
+        # Dense layer with 512 neurons
+        tf.keras.layers.Dense(512, activation='relu'),
+
+        # Batch normalization layer
+        tf.keras.layers.BatchNormalization(),
+
+        # Dropout layer to reduce overfitting
+        tf.keras.layers.Dropout(rate=0.5),
+
+        # Output layer with softmax activation for classification
+        tf.keras.layers.Dense(NUM_CATEGORIES, activation='softmax')
+    ])
+
+    # Compile the model
+    model.compile(
+        optimizer='adam',
+        loss='categorical_crossentropy',  # Use 'categorical_crossentropy' for multi-class classification
+        metrics=['accuracy']
+    )
+
+    return model
+
 
 
 if __name__ == "__main__":
